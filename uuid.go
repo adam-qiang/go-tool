@@ -4,7 +4,7 @@
  * Date: 2023-07-07 00:44:23
  */
 
-package tool
+package gotool
 
 import (
 	"crypto/rand"
@@ -25,7 +25,7 @@ var Nil UUID
 // @return UUID
 // @return error
 func UuidNew() (UUID, error) {
-	return _newRandom()
+	return newRandom()
 }
 
 // UuidToString UUID转string
@@ -33,22 +33,22 @@ func UuidNew() (UUID, error) {
 // @return string
 func UuidToString(uuid UUID) string {
 	var buf [36]byte
-	_encodeHex(buf[:], uuid)
+	encodeHex(buf[:], uuid)
 	return string(buf[:])
 }
 
 // 生成一个随机
 // @return UUID
 // @return error
-func _newRandom() (UUID, error) {
-	return _newRandomFromReader(reader)
+func newRandom() (UUID, error) {
+	return newRandomFromReader(reader)
 }
 
 // `io.ReadFull` 从 `rand.Reader` 精确地读取len(uuid)字节数据填充进uuid
 // @param r io.Reader
 // @return UUID
 // @return error
-func _newRandomFromReader(r io.Reader) (UUID, error) {
+func newRandomFromReader(r io.Reader) (UUID, error) {
 	var uuid UUID
 	_, err := io.ReadFull(r, uuid[:])
 	if err != nil {
@@ -63,7 +63,7 @@ func _newRandomFromReader(r io.Reader) (UUID, error) {
 // 按照 8-4-4-4-12 的规则将 uuid 分段编码，使用 - 连接
 // @param dst []byte
 // @param uuid UUID
-func _encodeHex(dst []byte, uuid UUID) {
+func encodeHex(dst []byte, uuid UUID) {
 	hex.Encode(dst, uuid[:4])
 	dst[8] = '-'
 	hex.Encode(dst[9:13], uuid[4:6])

@@ -4,7 +4,7 @@
  * Date: 2023-07-07 00:43:57
  */
 
-package tool
+package gotool
 
 import (
 	"encoding/json"

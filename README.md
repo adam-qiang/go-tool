@@ -12,6 +12,7 @@ go语言工具
 ### 一、data_convert_tool
 
 数据转换工具包
+包含数据类型转换、UUID生成（后续视情况增加其他工具包）
 
 ### 1、MapToString
 
